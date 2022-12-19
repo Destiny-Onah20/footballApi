@@ -42,15 +42,15 @@ export const updTeam = async(req,res)=>{
         let id = req.params.id;
         let body = req.body.numberOfPlayers
         console.log(body)
-        const team = await footballModel.update(body, {where: {id:id}})
-        if(body >= 22 && body <= 25 ){
+        const team = await footballModel.update(req.body, {where: {id:id}})
+        if(team[0] === 1 && body >= 22 && body <= 25 ){
         res.status(200).json({
             message: "Updated Successfully"
         })
 
         }else{
             res.status(400).json({
-                message: "Please check your numbers of players"
+                message: "Please check your numbers of players or the user with the id is not available"
             })
     }
     }catch(err){
